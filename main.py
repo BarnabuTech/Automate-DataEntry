@@ -8,7 +8,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 # Load the Excel file
-excel_file = "C:\\project\\test.xlsx"
+excel_file = "C:\\test\\test.xlsx"
 data = pd.read_excel(excel_file)
 
 # Set up the WebDriver
@@ -16,12 +16,12 @@ service = Service('C:\\chromedriver\\chromedriver.exe')
 driver = webdriver.Chrome(service=service)
 
 # Log in to the Django admin
-admin_login_url = "http://102.133.146.249/admin/login/?next=/admin/"
+admin_login_url = "http://your.url/" #Replace with your Django admin URL
 driver.get(admin_login_url)
 
 # Login credentials
-email = "gabrielplus2001@gmail.com"
-password = "@sph123S"
+email = "your@gmail.com" #Replace with actual Gmail account
+password = "yourpassword" #Replace with actual password
 
 # Wait for the email input field to be present before interacting
 email_input = WebDriverWait(driver, 10).until(
@@ -41,14 +41,13 @@ time.sleep(3)
 # Loop through the rows in the Excel data
 for index, row in data.iterrows():
     # Navigate to the Django admin 'add' page for your model
-    driver.get("http://102.133.146.249/admin/youthApp/youth/add/")
+    driver.get("http://your.url/") #Add your actuall Django admin URL
 
     # Wait for the page to load
     time.sleep(2)
 
     # Fill in the form using the data from the Excel row
     driver.find_element(By.NAME, 'first_name').send_keys(row['first_name'])
-    driver.find_element(By.NAME, 'middle_name').send_keys(row['middle_name'])
     driver.find_element(By.NAME, 'last_name').send_keys(row['last_name'])
     driver.find_element(By.NAME, 'gender').send_keys(row['gender'])
     driver.find_element(By.NAME, 'year_of_birth').send_keys(str(row['year_of_birth']))
